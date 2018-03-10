@@ -58,7 +58,7 @@ public class TwigUtilTempTest extends SymfonyTempCodeInsightFixtureTestCase {
 
 
         Settings.getInstance(getProject()).twigNamespaces.addAll(Collections.singletonList(
-            new TwigNamespaceSetting("Foobar", "res", true, TwigUtil.NamespaceType.BUNDLE, true)
+            new TwigNamespaceSetting("Foobar", "res", true)
         ));
 
         PsiFile file = PsiManager.getInstance(getProject()).findFile(res);
@@ -73,9 +73,9 @@ public class TwigUtilTempTest extends SymfonyTempCodeInsightFixtureTestCase {
         createFile("res/foo.html.twig");
 
         Settings.getInstance(getProject()).twigNamespaces.addAll(Arrays.asList(
-            new TwigNamespaceSetting("Foo", "res", true, TwigUtil.NamespaceType.ADD_PATH, true),
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.ADD_PATH, true),
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.BUNDLE, true)
+            new TwigNamespaceSetting("Foo", "res", true),
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true),
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true)
         ));
 
         String[] strings = {
@@ -215,10 +215,10 @@ public class TwigUtilTempTest extends SymfonyTempCodeInsightFixtureTestCase {
     @NotNull
     private List<TwigNamespaceSetting> createTwigNamespaceSettings() {
         return Arrays.asList(
-            new TwigNamespaceSetting("Foo", "res", true, TwigUtil.NamespaceType.ADD_PATH, true),
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.ADD_PATH, true),
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.BUNDLE, true),
-            new TwigNamespaceSetting("FooBundle", "res", true, TwigUtil.NamespaceType.BUNDLE, true)
+            new TwigNamespaceSetting("Foo", "res", true),
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true),
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true),
+            new TwigNamespaceSetting("FooBundle", "res", true)
         );
     }
 }

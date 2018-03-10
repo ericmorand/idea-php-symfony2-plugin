@@ -101,7 +101,7 @@ public class TwigSettingsForm implements Configurable {
                 for (TwigPath twigPath : sortableLookupItems) {
                     // dont use managed class here
                     // @TODO state to enabled (should not be here)
-                    TwigSettingsForm.this.modelList.addRow(twigPath.clone().setEnabled(true));
+                    TwigSettingsForm.this.modelList.addRow(twigPath.clone());
                 }
             }
         });
@@ -156,7 +156,7 @@ public class TwigSettingsForm implements Configurable {
         for(TwigPath twigPath :this.tableView.getListTableModel().getItems()) {
             // only custom and disabled path need to save
             if((!twigPath.isEnabled() && twigPath.getRelativePath(this.project) != null) || twigPath.isCustomPath()) {
-                twigPaths.add(new TwigNamespaceSetting(twigPath.getNamespace(), twigPath.getRelativePath(this.project), twigPath.isEnabled(), twigPath.getNamespaceType(), twigPath.isCustomPath()));
+                twigPaths.add(new TwigNamespaceSetting(twigPath.getNamespace(), twigPath.getRelativePath(this.project), twigPath.isCustomPath()));
             }
         }
 

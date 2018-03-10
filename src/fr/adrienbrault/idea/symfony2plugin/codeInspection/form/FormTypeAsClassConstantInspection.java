@@ -27,9 +27,9 @@ public class FormTypeAsClassConstantInspection extends LocalInspectionTool {
 
     @NotNull
     public PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        if(!Symfony2ProjectComponent.isEnabled(holder.getProject()) || !SymfonyUtil.isVersionGreaterThenEquals(holder.getProject(), "2.8")) {
-            return super.buildVisitor(holder, isOnTheFly);
-        }
+//        if(!Symfony2ProjectComponent.isEnabled(holder.getProject()) || !SymfonyUtil.isVersionGreaterThenEquals(holder.getProject(), "2.8")) {
+//            return super.buildVisitor(holder, isOnTheFly);
+//        }
 
         return new MyPsiElementVisitor(holder);
     }

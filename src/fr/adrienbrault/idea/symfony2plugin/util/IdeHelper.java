@@ -16,7 +16,6 @@ import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.util.ui.UIUtil;
 import fr.adrienbrault.idea.symfony2plugin.Settings;
-import fr.adrienbrault.idea.symfony2plugin.SettingsForm;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,8 +127,6 @@ public class IdeHelper {
             // handle html click events
             if("config".equals(event.getDescription())) {
 
-                // open settings dialog and show panel
-                SettingsForm.show(project);
             } else if("enable".equals(event.getDescription())) {
                 enablePluginAndConfigure(project);
                 Notifications.Bus.notify(new Notification("Symfony Plugin", "Symfony Plugin", "Plugin enabled", NotificationType.INFORMATION), project);

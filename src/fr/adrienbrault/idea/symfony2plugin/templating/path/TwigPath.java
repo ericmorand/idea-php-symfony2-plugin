@@ -21,16 +21,7 @@ public class TwigPath implements Comparable<TwigPath> {
     @NotNull
     private String namespace = TwigUtil.MAIN;
 
-    @NotNull
-    private TwigUtil.NamespaceType namespaceType = TwigUtil.NamespaceType.ADD_PATH;
-
-    private boolean enabled = true;
     private boolean customPath = false;
-
-    @NotNull
-    public TwigUtil.NamespaceType getNamespaceType() {
-        return namespaceType;
-    }
 
     public TwigPath(@NotNull String path) {
         this.path = path;
@@ -54,7 +45,6 @@ public class TwigPath implements Comparable<TwigPath> {
         }
 
         TwigPath twigPath = new TwigPath(this.getPath(), this.getNamespace(), this.isCustomPath());
-        twigPath.setEnabled(this.isEnabled());
 
         return twigPath;
     }
@@ -102,13 +92,7 @@ public class TwigPath implements Comparable<TwigPath> {
     }
 
     public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Deprecated
-    public TwigPath setEnabled(boolean enabled) {
-        this.enabled = enabled;
-        return this;
+        return true;
     }
 
     @Nullable

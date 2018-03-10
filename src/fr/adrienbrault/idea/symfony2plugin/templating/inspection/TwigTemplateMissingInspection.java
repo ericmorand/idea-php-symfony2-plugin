@@ -24,10 +24,6 @@ import java.util.Collection;
 public class TwigTemplateMissingInspection extends LocalInspectionTool {
     @NotNull
     public PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
-        if(!Symfony2ProjectComponent.isEnabled(holder.getProject())) {
-            return super.buildVisitor(holder, isOnTheFly);
-        }
-
         return new PsiElementVisitor() {
             @Override
             public void visitElement(PsiElement element) {

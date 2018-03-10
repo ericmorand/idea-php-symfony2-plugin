@@ -117,15 +117,6 @@
      on how to target different products -->
     <depends>com.intellij.modules.lang</depends>
 
-    <extensions defaultExtensionNs="com.jetbrains.php">
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.dic.SymfonyContainerTypeProvider"/>
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.util.EventDispatcherTypeProvider"/>
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.doctrine.ObjectRepositoryTypeProvider"/>
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.doctrine.ObjectRepositoryResultTypeProvider"/>
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.doctrine.ObjectManagerFindTypeProvider"/>
-        <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.assistant.signature.MethodSignatureTypeProvider"/>
-    </extensions>
-
     <extensions defaultExtensionNs="com.intellij">
 
         <projectService serviceImplementation="fr.adrienbrault.idea.symfony2plugin.Settings"/>
@@ -214,244 +205,12 @@
         <codeInsight.parameterNameHints language="XML" implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.ServiceArgumentParameterHintsProvider"/>
         <codeInsight.parameterNameHints language="yaml" implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.ServiceArgumentParameterHintsProvider"/>
 
-        <localInspection groupPath="Symfony" shortName="PhpRouteMissingInspection" displayName="Route Missing"
-                         groupName="Route"
-                         enabledByDefault="true" level="WARNING"
-                         language="PHP"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.routing.inspection.PhpRouteMissingInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="Symfony2YamlRouteDuplicateInspection" displayName="Duplicate Route"
-                         groupName="Route"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.routing.inspection.DuplicateLocalRouteInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="Symfony2YamlDuplicateServiceKeyInspection" displayName="Duplicate Key"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.yaml.inspection.YamlDuplicateServiceKeyInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="Symfony2YamlDuplicateParameterKeyInspection" displayName="Duplicate Key"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.yaml.inspection.YamlDuplicateParameterKeyInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="Symfony2XmlDuplicateServiceKeyInspection" displayName="Duplicate Key"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="XML"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.xml.inspection.XmlDuplicateServiceKeyInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="Symfony2XmlDuplicateParameterKeyInspection" displayName="Duplicate Key"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="XML"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.xml.inspection.XmlDuplicateParameterKeyInspection"/>
-
-
-        <localInspection groupPath="Symfony" shortName="YamlControllerMethod" displayName="Missing Controller Action"
-                         groupName="Route"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.routing.inspection.ControllerMethodInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlDeprecatedClasses" displayName="Deprecated Class"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.codeInspection.service.ServiceDeprecatedClassesInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TaggedExtendsInterfaceClass" displayName="Missing Tag extends/interface statement"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.codeInspection.service.TaggedExtendsInterfaceClassInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="EventMethodCall" displayName="Create Method"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.yaml.inspection.EventMethodCallInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="XmlServiceArgumentInspection" displayName="Symfony: XML Arguments"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="XML"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.config.xml.inspection.XmlServiceArgumentInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlServiceArgumentInspection" displayName="Symfony: Yaml Arguments"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.intentions.yaml.YamlServiceArgumentInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="CaseSensitivityServiceInspection" displayName="Symfony: Container sensitivity"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.CaseSensitivityServiceInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="RouteSettingDeprecatedInspection" displayName="Symfony: Route settings deprecated"
-                         groupName="Route"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.routing.inspection.RouteSettingDeprecatedInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="ContainerSettingDeprecatedInspection" displayName="Symfony: Container settings deprecated"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.ContainerSettingDeprecatedInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigVariablePathInspection" displayName="Field or method not found"
-                         groupName="Twig"
-                         enabledByDefault="true" level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.inspection.TwigVariablePathInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigVariableDeprecatedInspection" displayName="Deprecated Twig variable"
-                         groupName="Twig"
-                         enabledByDefault="true" level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.inspection.TwigVariableDeprecatedInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlQuotedEscapedInspection" displayName="Quoted issues"
-                         groupName="Yaml"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.intentions.yaml.YamlQuotedEscapedInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlUnquotedColon" displayName="Colon in the unquoted mapping"
-                         groupName="Yaml"
-                         enabledByDefault="true" level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.intentions.yaml.YamlUnquotedColon"/>
-
-        <localInspection groupPath="Symfony" shortName="FormTypeAsClassConstant" displayName="Fully-qualified class name (FQCN) in form types"
-                         groupName="Form"
-                         enabledByDefault="true" level="WARNING"
-                         language="PHP"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.codeInspection.form.FormTypeAsClassConstantInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="ContainerConstant" displayName="Constant not found"
-                         groupName="Service"
-                         enabledByDefault="true" level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.ContainerConstantInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigTranslationDomain" displayName="Twig: Missing translation domain"
-                         groupName="Translation"
-                         enabledByDefault="true" level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.translation.inspection.TwigTranslationDomainInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigTranslationKeyInspection" displayName="Twig: Missing translation key"
-                         groupName="Translation"
-                         enabledByDefault="true" level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.translation.inspection.TwigTranslationKeyInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="PhpTranslationDomainInspection" displayName="PHP: Missing translation domain"
-                         groupName="Translation"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="PHP"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.translation.PhpTranslationDomainInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="PhpTranslationKeyInspection" displayName="PHP: Missing translation key"
-                         groupName="Translation"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="PHP"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.translation.PhpTranslationKeyInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="PhpTemplateMissingInspection" displayName="Twig: Template Missing"
-                         groupName="Twig"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="PHP"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.PhpTemplateMissingInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="MissingService" displayName="Missing Service"
-                         groupName="Service"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.MissingServiceInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="XmlServiceInstanceInspection" displayName="XML: Wrong Service Instance"
-                         groupName="Service"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="XML"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.XmlServiceInstanceInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlParameterInspection" displayName="Yaml: Missing Parameter"
-                         groupName="Service"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.YamlParameterInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="YamlClassInspection" displayName="Yaml: Missing Class"
-                         groupName="Service"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.YamlClassInspection"/>
-
-
-        <localInspection groupPath="Symfony" shortName="YamlXmlServiceInstanceInspection" displayName="Yaml: Wrong Service Instance"
-                         groupName="Service"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="yaml"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.dic.inspection.YamlXmlServiceInstanceInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigRouteInspection" displayName="Twig: Missing Route"
-                         groupName="Route"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.routing.inspection.TwigRouteMissingInspection"/>
-
         <localInspection groupPath="Symfony" shortName="TwigTemplateMissingInspection" displayName="Twig: Missing Template"
                          groupName="Template"
                          enabledByDefault="true"
                          level="WARNING"
                          language="Twig"
                          implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.inspection.TwigTemplateMissingInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigAssetMissingInspection" displayName="Twig: Missing Asset"
-                         groupName="Asset"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.inspection.TwigAssetMissingInspection"/>
-
-        <localInspection groupPath="Symfony" shortName="TwigAssetsTagMissingInspection" displayName="Twig: Missing Asset"
-                         groupName="Asset"
-                         enabledByDefault="true"
-                         level="WARNING"
-                         language="Twig"
-                         implementationClass="fr.adrienbrault.idea.symfony2plugin.templating.inspection.TwigAssetsTagMissingInspection"/>
-
-        <intentionAction>
-            <className>fr.adrienbrault.idea.symfony2plugin.intentions.php.PhpServiceIntention</className>
-            <category>PHP</category>
-            <descriptionDirectoryName>Symfony2ConstructorCreateServer</descriptionDirectoryName>
-        </intentionAction>
-
-        <intentionAction>
-            <className>fr.adrienbrault.idea.symfony2plugin.intentions.php.XmlServiceArgumentIntention</className>
-            <category>XML</category>
-            <descriptionDirectoryName>XmlServiceArgumentIntention</descriptionDirectoryName>
-        </intentionAction>
-
-        <intentionAction>
-            <className>fr.adrienbrault.idea.symfony2plugin.intentions.xml.XmlServiceSuggestIntention</className>
-            <category>XML</category>
-            <descriptionDirectoryName>XmlServiceSuggestIntention</descriptionDirectoryName>
-        </intentionAction>
-
-        <intentionAction>
-            <className>fr.adrienbrault.idea.symfony2plugin.intentions.xml.XmlServiceTagIntention</className>
-            <category>XML</category>
-            <descriptionDirectoryName>SymfonyXmlServiceTagIntention</descriptionDirectoryName>
-        </intentionAction>
 
         <intentionAction>
             <className>fr.adrienbrault.idea.symfony2plugin.intentions.yaml.YamlServiceTagIntention</className>
@@ -548,8 +307,6 @@
         <TwigNamespaceExtension implementation="fr.adrienbrault.idea.symfony2plugin.templating.path.ConfigAddPathTwigNamespaces"/>
         <TwigNamespaceExtension implementation="fr.adrienbrault.idea.symfony2plugin.templating.path.ContainerTwigNamespaceExtension"/>
         <TwigNamespaceExtension implementation="fr.adrienbrault.idea.symfony2plugin.templating.path.GlobalAppTwigNamespaceExtension"/>
-        <TwigNamespaceExtension implementation="fr.adrienbrault.idea.symfony2plugin.templating.path.BundleTwigNamespaceExtension"/>
-        <TwigNamespaceExtension implementation="fr.adrienbrault.idea.symfony2plugin.templating.path.BundleOverwriteNamespaceExtensions"/>
 
         <ServiceCollector implementation="fr.adrienbrault.idea.symfony2plugin.dic.DefaultServiceCollector"/>
 
@@ -565,35 +322,8 @@
     </extensions>
 
     <depends>com.jetbrains.twig</depends>
-    <depends>com.jetbrains.php</depends>
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.yaml</depends>
-    <depends>de.espend.idea.php.annotation</depends>
-
-    <depends optional="true">de.espend.idea.php.toolbox</depends>
-    <depends optional="true" config-file="deployment-aware.xml">com.jetbrains.plugins.webDeployment</depends>
-
-    <extensions defaultExtensionNs="de.espend.idea.php.annotation">
-        <PhpAnnotationReferenceProvider implementation="fr.adrienbrault.idea.symfony2plugin.twig.annotation.TemplateAnnotationReferences"/>
-        <PhpAnnotationReferenceProvider implementation="fr.adrienbrault.idea.symfony2plugin.doctrine.DoctrineAnnotationTargetEntityReferences"/>
-        <PhpAnnotationReferenceProvider implementation="fr.adrienbrault.idea.symfony2plugin.config.SymfonyAnnotationReferences"/>
-        <PhpAnnotationReferenceProvider implementation="fr.adrienbrault.idea.symfony2plugin.doctrine.DoctrineAnnotationReferencedColumnReferences"/>
-        <PhpAnnotationDocTagAnnotator implementation="fr.adrienbrault.idea.symfony2plugin.twig.annotation.TemplateAnnotationAnnotator"/>
-        <PhpAnnotationDocTagGotoHandler implementation="fr.adrienbrault.idea.symfony2plugin.twig.annotation.TemplateAnnotationGotoHandler"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="de.espend.idea.php.toolbox.extension">
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.ServiceToolboxProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.RoutesToolboxProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.TwigToolboxProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.TranslationDomainToolboxProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.ServiceParameterToolboxProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.DoctrineModelProvider"/>
-        <PhpToolboxProviderInterface implementation="fr.adrienbrault.idea.symfony2plugin.external.toolbox.provider.ControllerToolboxProvider"/>
-
-        <PhpToolboxTargetLocator implementation="fr.adrienbrault.idea.symfony2plugin.external.locator.TwigFileToolboxTargetLocator"/>
-        <PhpToolboxTargetLocator implementation="fr.adrienbrault.idea.symfony2plugin.external.locator.BundleFileToolboxTargetLocator"/>
-    </extensions>
 
     <project-components>
         <component>

@@ -6,10 +6,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.jetbrains.plugins.webDeployment.config.Deployable;import com.jetbrains.plugins.webDeployment.config.FileTransferConfig;
-import com.jetbrains.plugins.webDeployment.config.PublishConfig;
-import com.jetbrains.plugins.webDeployment.config.WebServerConfig;
-import com.jetbrains.plugins.webDeployment.ui.ServerBrowserDialog;
 import fr.adrienbrault.idea.symfony2plugin.ui.dict.UiFilePathInterface;
 import fr.adrienbrault.idea.symfony2plugin.ui.dict.UiFilePathPresentable;
 import org.jetbrains.annotations.NotNull;
@@ -52,34 +48,6 @@ public class UiSettingsUtil {
         }
 
         return path;
-    }
-
-    public static void openFileDialogForDefaultWebServerConnection(@NotNull Project project, @NotNull WebServerFileDialogCallback callback) {
-        WebServerConfig server = PublishConfig.getInstance(project).findDefaultServer();
-        if(server == null) {
-            callback.noDefaultServer();
-            return;
-        }
-
-        String rootPath = server.getFileTransferConfig().getRootFolder();
-        ServerBrowserDialog d = new ServerBrowserDialog(project, Deployable.create(server), String.format("Remote file: %s", server.getName()), false, FileTransferConfig.Origin.Default, new WebServerConfig.RemotePath(rootPath));
-        d.show();
-        if (!d.isOK()) {
-            return;
-        }
-
-        WebServerConfig.RemotePath path = d.getPath();
-        if (path != null && callback.validate(server, path)) {
-            callback.success(server, path);
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid file selected", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public interface WebServerFileDialogCallback {
-        void noDefaultServer();
-        boolean validate(@NotNull WebServerConfig server, @NotNull WebServerConfig.RemotePath remotePath);
-        void success(@NotNull WebServerConfig server, @NotNull WebServerConfig.RemotePath remotePath);
     }
 
     public static UiFilePathPresentable getPresentableFilePath(@NotNull Project project, @NotNull UiFilePathInterface uiFilePath) {

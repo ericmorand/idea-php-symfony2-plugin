@@ -101,7 +101,6 @@ public class TwigNamespaceDialog extends JDialog {
             this.tableView.setRowSelectionInterval(row, row);
         }
 
-        twigPath.setEnabled(true);
         dispose();
     }
 

@@ -32,7 +32,7 @@ public class TwigBlockUtilTest extends SymfonyTempCodeInsightFixtureTestCase {
         PsiFile psiFile = PsiManager.getInstance(getProject()).findFile(file);
 
         Settings.getInstance(getProject()).twigNamespaces.addAll(Collections.singletonList(
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.ADD_PATH, true)
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true)
         ));
 
         Collection<TwigBlock> walk = TwigBlockUtil.collectParentBlocks(true, psiFile);
@@ -54,7 +54,7 @@ public class TwigBlockUtilTest extends SymfonyTempCodeInsightFixtureTestCase {
         PsiFile psiFile = PsiManager.getInstance(getProject()).findFile(file);
 
         Settings.getInstance(getProject()).twigNamespaces.addAll(Collections.singletonList(
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.ADD_PATH, true)
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true)
         ));
 
         Collection<TwigBlock> walk = TwigBlockUtil.collectParentBlocks(false, psiFile);
@@ -76,7 +76,7 @@ public class TwigBlockUtilTest extends SymfonyTempCodeInsightFixtureTestCase {
         PsiFile psiFile = PsiManager.getInstance(getProject()).findFile(file);
 
         Settings.getInstance(getProject()).twigNamespaces.addAll(Collections.singletonList(
-            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true, TwigUtil.NamespaceType.ADD_PATH, true)
+            new TwigNamespaceSetting(TwigUtil.MAIN, "res", true)
         ));
 
         Collection<TwigBlock> walk = TwigBlockUtil.collectParentBlocks(true, psiFile);

@@ -32,7 +32,6 @@ public class JsonFileIndexTwigNamespacesTest extends SymfonyLightCodeInsightFixt
         assertEquals("src/foo/res", foo.getPath());
         assertEquals("foo", foo.getNamespace());
         assertEquals(true, foo.isEnabled());
-        assertEquals(TwigUtil.NamespaceType.ADD_PATH, foo.getNamespaceType());
         assertEquals(true, foo.isCustomPath());
     }
 
@@ -47,7 +46,6 @@ public class JsonFileIndexTwigNamespacesTest extends SymfonyLightCodeInsightFixt
         assertNotNull(fooBundle);
         assertEquals("src/foo/res", fooBundle.getPath());
         assertEquals("FooBundle", fooBundle.getNamespace());
-        assertEquals(TwigUtil.NamespaceType.BUNDLE, fooBundle.getNamespaceType());
     }
 
     private static class MyTwigPathNamespaceCondition implements Condition<TwigPath> {
