@@ -35,10 +35,7 @@ public class BundleTwigNamespaceExtension implements TwigNamespaceExtension {
 
             String bundleName = bundle.getName();
 
-            twigPaths.add(new TwigPath(path, bundleName, TwigUtil.NamespaceType.BUNDLE));
-            if(bundleName.endsWith("Bundle")) {
-                twigPaths.add(new TwigPath(path, bundleName.substring(0, bundleName.length() - 6), TwigUtil.NamespaceType.ADD_PATH));
-            }
+            twigPaths.add(new TwigPath(path, bundleName));
         }
 
         return twigPaths;

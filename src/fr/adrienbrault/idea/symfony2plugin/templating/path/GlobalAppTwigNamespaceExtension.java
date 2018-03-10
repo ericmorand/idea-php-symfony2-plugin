@@ -43,8 +43,7 @@ public class GlobalAppTwigNamespaceExtension implements TwigNamespaceExtension {
         Collection<TwigPath> paths = new ArrayList<>();
 
         directories.stream().map(VirtualFile::getPath).forEach(path -> {
-            paths.add(new TwigPath(path, TwigUtil.MAIN, TwigUtil.NamespaceType.BUNDLE));
-            paths.add(new TwigPath(path, TwigUtil.MAIN, TwigUtil.NamespaceType.ADD_PATH));
+            paths.add(new TwigPath(path, TwigUtil.MAIN));
         });
 
         return paths;

@@ -140,9 +140,7 @@ public class TwigTemplateGoToDeclarationHandler implements GotoDeclarationHandle
             .psiElement(TwigTokenTypes.IDENTIFIER)
             .withParent(PlatformPatterns.or(
                 PlatformPatterns.psiElement(TwigElementTypes.PRINT_BLOCK),
-                PlatformPatterns.psiElement(TwigElementTypes.SET_TAG),
-
-                PlatformPatterns.psiElement(TwigElementTypes.FUNCTION_CALL)
+                PlatformPatterns.psiElement(TwigElementTypes.SET_TAG)
             )).withLanguage(TwigLanguage.INSTANCE).accepts(psiElement)) {
 
             targets.addAll(this.getFunctions(psiElement));

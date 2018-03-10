@@ -12,12 +12,71 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="php" level="project" />
     <orderEntry type="library" scope="TEST" name="css" level="project" />
     <orderEntry type="library" scope="TEST" name="properties" level="project" />
-    <orderEntry type="library" scope="TEST" name="yaml" level="project" />
     <orderEntry type="library" scope="TEST" name="junit-4.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="twig" level="project" />
     <orderEntry type="library" scope="TEST" name="java-i18n" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="twig">
+        <CLASSES>
+          <root url="file://$USER_HOME$/Documents/twig/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$USER_HOME$/Documents/twig/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="php">
+        <CLASSES>
+          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" />
+        </SOURCES>
+        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" recursive="false" />
+        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="yaml">
+        <CLASSES>
+          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/yaml/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/yaml/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/idea-php-annotation-plugin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/php-toolbox.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="org.apache.commons:commons-vfs2:2.0" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="webDeployment">
+        <CLASSES>
+          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/webDeployment/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/webDeployment/lib" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

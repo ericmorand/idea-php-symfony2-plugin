@@ -24,9 +24,7 @@ public class TwigNamespaceDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JComboBox namespaceType;
     private TextFieldWithBrowseButton namespacePath;
-    private JCheckBox chkboxEnabled;
     private JTextField name;
     private TableView<TwigPath> tableView;
     private Project project;
@@ -36,7 +34,6 @@ public class TwigNamespaceDialog extends JDialog {
         this(project, tableView);
         this.name.setText(twigPath.getNamespace());
         this.namespacePath.getTextField().setText(twigPath.getPath());
-        this.namespaceType.getModel().setSelectedItem(twigPath.getNamespaceType().toString());
         this.twigPath = twigPath;
         this.setOkState();
     }
@@ -85,7 +82,7 @@ public class TwigNamespaceDialog extends JDialog {
 
         String namespacePath = this.namespacePath.getText();
 
-        TwigPath twigPath = new TwigPath(namespacePath, namespace, TwigUtil.NamespaceType.valueOf((String) this.namespaceType.getSelectedItem()), true);
+        TwigPath twigPath = new TwigPath(namespacePath, namespace, true);
         if(namespacePath.length() == 0) {
             dispose();
             return;
@@ -104,7 +101,7 @@ public class TwigNamespaceDialog extends JDialog {
             this.tableView.setRowSelectionInterval(row, row);
         }
 
-        twigPath.setEnabled(this.chkboxEnabled.isSelected());
+        twigPath.setEnabled(true);
         dispose();
     }
 

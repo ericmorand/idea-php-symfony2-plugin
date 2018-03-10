@@ -24,7 +24,7 @@ public class BundleOverwriteNamespaceExtensions implements TwigNamespaceExtensio
         new SymfonyBundleUtil(parameter.getProject()).getParentBundles().forEach((key, virtualFile) -> {
             VirtualFile views = virtualFile.getRelative("Resources/views");
             if (views != null) {
-                twigPaths.add(new TwigPath(views.getPath(), key, TwigUtil.NamespaceType.BUNDLE));
+                twigPaths.add(new TwigPath(views.getPath(), key));
             }
         });
 

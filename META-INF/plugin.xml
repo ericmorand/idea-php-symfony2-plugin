@@ -1,6 +1,6 @@
 <idea-plugin url="https://github.com/Haehnchen/idea-php-symfony2-plugin">
     <id>fr.adrienbrault.idea.symfony2plugin</id>
-    <name>Symfony Plugin</name>
+    <name>Twig namespaces</name>
     <version>0.16.165</version>
     <vendor email="daniel@espendiller.net" url="http://espend.de">Daniel Espendiller</vendor>
 
@@ -111,7 +111,11 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="173.4127"/>
+    <idea-version since-build="172.4155"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+     on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.jetbrains.php">
         <typeProvider3 implementation="fr.adrienbrault.idea.symfony2plugin.dic.SymfonyContainerTypeProvider"/>
@@ -126,53 +130,11 @@
 
         <projectService serviceImplementation="fr.adrienbrault.idea.symfony2plugin.Settings"/>
 
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.SettingsForm"
-                             displayName="Symfony"
-                             id="Symfony2.SettingsForm"
-                             parentId="reference.webide.settings.project.settings.php"
-                             nonDefaultProject="true"
-                />
-
         <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.TwigSettingsForm"
-                             displayName="Twig / Template"
-                             parentId="Symfony2.SettingsForm"
+                             displayName="Twig namespaces"
+                             groupId="language"
                              nonDefaultProject="true"
                 />
-
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.ContainerSettingsForm"
-                             displayName="Container"
-                             parentId="Symfony2.SettingsForm"
-                             id="Symfony2.ContainerSettingsForm"
-                             nonDefaultProject="true"
-                />
-
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.MethodParameterReferenceSettingsForm"
-                             displayName="Method References"
-                             parentId="Symfony2.SettingsForm"
-                             id="Symfony2.MethodReferenceSettingsForm"
-                             nonDefaultProject="true"
-                />
-
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.MethodSignatureTypeSettingsForm"
-                             displayName="Type Provider"
-                             parentId="Symfony2.SettingsForm"
-                             id="Symfony2.MethodSignatureTypeSettingsForm"
-                             nonDefaultProject="true"
-                />
-
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.RoutingSettingsForm"
-                             displayName="Routing"
-                             parentId="Symfony2.SettingsForm"
-                             id="Symfony2.RoutingSettingsForm"
-                             nonDefaultProject="true"
-        />
-
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.profiler.ui.ProfilerSettingsDialog"
-                             displayName="Profiler"
-                             parentId="Symfony2.SettingsForm"
-                             id="Symfony.ProfilerSettingsForm"
-                             nonDefaultProject="true"
-        />
 
         <psi.referenceContributor implementation="fr.adrienbrault.idea.symfony2plugin.config.SymfonyPhpReferenceContributor"/>
         <psi.referenceContributor implementation="fr.adrienbrault.idea.symfony2plugin.translation.TranslationReferenceContributor"/>

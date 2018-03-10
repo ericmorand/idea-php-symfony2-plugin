@@ -41,8 +41,8 @@ public class TwigPath implements Comparable<TwigPath> {
         this.namespace = namespace;
     }
 
-    public TwigPath(@NotNull String path, @NotNull String namespace, @NotNull TwigUtil.NamespaceType namespaceType, boolean customPath) {
-        this(path, namespace, namespaceType);
+    public TwigPath(@NotNull String path, @NotNull String namespace, boolean customPath) {
+        this(path, namespace);
         this.customPath = customPath;
     }
 
@@ -53,15 +53,10 @@ public class TwigPath implements Comparable<TwigPath> {
         } catch (CloneNotSupportedException ignored) {
         }
 
-        TwigPath twigPath = new TwigPath(this.getPath(), this.getNamespace(), this.getNamespaceType(), this.isCustomPath());
+        TwigPath twigPath = new TwigPath(this.getPath(), this.getNamespace(), this.isCustomPath());
         twigPath.setEnabled(this.isEnabled());
 
         return twigPath;
-    }
-
-    public TwigPath(@NotNull String path, @NotNull String namespace, @NotNull TwigUtil.NamespaceType namespaceType) {
-        this(path, namespace);
-        this.namespaceType = namespaceType;
     }
 
     @NotNull

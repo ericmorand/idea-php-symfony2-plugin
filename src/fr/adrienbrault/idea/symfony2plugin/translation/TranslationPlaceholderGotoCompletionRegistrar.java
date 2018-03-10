@@ -150,27 +150,7 @@ public class TranslationPlaceholderGotoCompletionRegistrar implements GotoComple
             }
 
             PsiElement functionCall = parent.getParent();
-            if(functionCall.getNode().getElementType() != TwigElementTypes.FUNCTION_CALL) {
                 return null;
-            }
-
-            // find translation key: 'symfony.great'
-            PsiElement function = PsiElementUtils.getPrevSiblingOfType(functionCall, TwigPattern.getTranslationKeyPattern(this.filter));
-            if(function == null) {
-                return null;
-            }
-
-            String key = function.getText();
-            if(StringUtils.isBlank(key)) {
-                return null;
-            }
-
-            String domain = TwigUtil.getPsiElementTranslationDomain(function);
-            if(StringUtils.isBlank(domain)) {
-                return null;
-            }
-
-            return new MyTranslationPlaceholderGotoCompletionProvider(psiElement, key, domain);
         }
     }
 }

@@ -167,10 +167,10 @@ public class TwigPattern {
                     PlatformPatterns.psiElement(TwigElementTypes.IF_TAG),
                     PlatformPatterns.psiElement(TwigElementTypes.SET_TAG),
                     PlatformPatterns.psiElement(TwigElementTypes.ELSE_TAG),
-                    PlatformPatterns.psiElement(TwigElementTypes.ELSEIF_TAG),
+                    PlatformPatterns.psiElement(TwigElementTypes.ELSEIF_TAG)
 
                     // PhpStorm 2017.3.2: {{ asset('') }}
-                    PlatformPatterns.psiElement(TwigElementTypes.FUNCTION_CALL)
+//                    PlatformPatterns.psiElement(TwigElementTypes.FUNCTION_CALL)
                 )
             )
             .afterLeafSkipping(
@@ -569,10 +569,10 @@ public class TwigPattern {
 
     public static ElementPattern<PsiElement> getPrintBlockFunctionPattern() {
         return PlatformPatterns.psiElement().withParent(PlatformPatterns.or(
-            PlatformPatterns.psiElement(TwigElementTypes.PRINT_BLOCK),
+            PlatformPatterns.psiElement(TwigElementTypes.PRINT_BLOCK)
 
             // PhpStorm 2017.3.2
-            PlatformPatterns.psiElement(TwigElementTypes.FUNCTION_CALL)
+//            PlatformPatterns.psiElement(TwigElementTypes.FUNCTION_CALL)
         )).withLanguage(TwigLanguage.INSTANCE);
     }
 

@@ -66,7 +66,7 @@ public class ConfigAddPathTwigNamespaces implements TwigNamespaceExtension {
                     first = TwigUtil.MAIN;
                 }
 
-                twigPaths.add(new TwigPath(stringStringPair.getSecond(), first, TwigUtil.NamespaceType.ADD_PATH, true));
+                twigPaths.add(new TwigPath(stringStringPair.getSecond(), first, true));
             }
         }
 

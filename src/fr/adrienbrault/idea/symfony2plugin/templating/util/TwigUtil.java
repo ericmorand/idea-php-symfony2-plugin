@@ -1334,7 +1334,7 @@ public class TwigUtil {
         if(twigNamespaceSettings != null) {
             for(TwigNamespaceSetting twigNamespaceSetting: twigNamespaceSettings) {
                 if(twigNamespaceSetting.isCustom()) {
-                    twigPaths.add(new TwigPath(twigNamespaceSetting.getPath(), twigNamespaceSetting.getNamespace(), twigNamespaceSetting.getNamespaceType(), true).setEnabled(twigNamespaceSetting.isEnabled()));
+                    twigPaths.add(new TwigPath(twigNamespaceSetting.getPath(), twigNamespaceSetting.getNamespace(), true).setEnabled(twigNamespaceSetting.isEnabled()));
                 }
             }
         }

@@ -762,7 +762,6 @@ public class TwigUtilTest extends SymfonyLightCodeInsightFixtureTestCase {
         )));
 
         assertSize(2, TwigUtil.getUniqueTwigTemplatesList(Arrays.asList(
-            new TwigPath("path", "path", TwigUtil.NamespaceType.BUNDLE),
             new TwigPath("path", "path")
         )));
     }

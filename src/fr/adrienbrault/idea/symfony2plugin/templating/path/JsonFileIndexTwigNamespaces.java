@@ -129,9 +129,9 @@ public class JsonFileIndexTwigNamespaces implements TwigNamespaceExtension {
                 String namespacePath = StringUtils.stripStart(relativePath, "/");
 
                 if(StringUtils.isNotBlank(namespace)) {
-                    twigPaths.add(new TwigPath(namespacePath, namespace, pathType, true));
+                    twigPaths.add(new TwigPath(namespacePath, namespace, true));
                 } else {
-                    twigPaths.add(new TwigPath(namespacePath, TwigUtil.MAIN, pathType, true));
+                    twigPaths.add(new TwigPath(namespacePath, TwigUtil.MAIN, true));
                 }
             }
 

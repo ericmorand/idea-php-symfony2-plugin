@@ -79,10 +79,7 @@ public class TwigSettingsForm implements Configurable {
         this.tableView = new TableView<>();
         this.modelList = new ListTableModel<>(
             new NamespaceColumn(),
-            new PathColumn(project),
-            new TypeColumn(),
-            new CustomColumn(),
-            new DisableColumn()
+            new PathColumn(project)
         );
 
         this.attachItems();
@@ -220,32 +217,6 @@ public class TwigSettingsForm implements Configurable {
         }
     }
 
-    private class CustomColumn extends ColumnInfo<TwigPath, String> {
-
-        public CustomColumn() {
-            super("Parser");
-        }
-
-        @Nullable
-        @Override
-        public String valueOf(TwigPath twigPath) {
-            return twigPath.isCustomPath() ? "Custom" : "Internal";
-        }
-    }
-
-    private class TypeColumn extends ColumnInfo<TwigPath, String> {
-
-        public TypeColumn() {
-            super("Type");
-        }
-
-        @Nullable
-        @Override
-        public String valueOf(TwigPath twigPath) {
-            return twigPath.getNamespaceType().toString();
-        }
-    }
-
     private abstract class BooleanColumn extends ColumnInfo<TwigPath, Boolean>
     {
         public BooleanColumn(String name) {
@@ -261,27 +232,6 @@ public class TwigSettingsForm implements Configurable {
         {
             return Boolean.class;
         }
-    }
-
-    private class DisableColumn extends BooleanColumn {
-
-        public DisableColumn() {
-            super("on");
-        }
-
-        public Boolean valueOf(TwigPath twigPath) {
-            return twigPath.isEnabled();
-        }
-
-        public void setValue(TwigPath twigPath, Boolean value){
-            twigPath.setEnabled(value);
-            TwigSettingsForm.this.tableView.getListTableModel().fireTableDataChanged();
-        }
-
-        public int getWidth(JTable table) {
-            return 50;
-        }
-
     }
 
     private void openTwigPathDialog(@Nullable TwigPath twigPath) {
