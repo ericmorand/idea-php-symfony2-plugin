@@ -14,9 +14,6 @@ public class TwigPathJson {
     private String namespace;
 
     @Nullable
-    private String type;
-
-    @Nullable
     public String getPath() {
         return path;
     }
@@ -24,10 +21,5 @@ public class TwigPathJson {
     @Nullable
     public String getNamespace() {
         return namespace;
-    }
-
-    @Nullable
-    public String getType() {
-        return type;
     }
 }

@@ -49,7 +49,7 @@ public class Settings implements PersistentStateComponent<Settings> {
 
     public boolean remoteDevFileScheduler = false;
 
-    public boolean pluginEnabled = false;
+    public boolean pluginEnabled = true;
 
     public boolean objectSignatureTypeProvider = false;
 
@@ -78,6 +78,9 @@ public class Settings implements PersistentStateComponent<Settings> {
      * Last user selected output of service generator eg: yaml or xml
      */
     public String lastServiceGeneratorLanguage = null;
+
+    @Nullable
+    public String namespacesManifestPath = null;
 
     @Nullable
     public List<TwigNamespaceSetting> twigNamespaces = new ArrayList<>();

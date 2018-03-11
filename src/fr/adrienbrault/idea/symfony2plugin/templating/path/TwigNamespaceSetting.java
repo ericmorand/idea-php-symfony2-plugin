@@ -21,6 +21,7 @@ public class TwigNamespaceSetting {
     }
 
     public TwigNamespaceSetting(String namespace, String path, boolean custom) {
+        this(namespace, path);
         this.custom = custom;
     }
 

@@ -4,16 +4,16 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.CachedValue;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
+import com.intellij.psi.util.*;
+import fr.adrienbrault.idea.symfony2plugin.Settings;
 import fr.adrienbrault.idea.symfony2plugin.extension.TwigNamespaceExtension;
 import fr.adrienbrault.idea.symfony2plugin.extension.TwigNamespaceExtensionParameter;
 import fr.adrienbrault.idea.symfony2plugin.templating.dict.TwigConfigJson;
@@ -21,9 +21,11 @@ import fr.adrienbrault.idea.symfony2plugin.templating.path.dict.TwigPathJson;
 import fr.adrienbrault.idea.symfony2plugin.templating.util.TwigUtil;
 import fr.adrienbrault.idea.symfony2plugin.util.VfsExUtil;
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.scm.util.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -31,7 +33,7 @@ import java.util.Collection;
  * @author Daniel Espendiller <daniel@espendiller.net>
  */
 public class JsonFileIndexTwigNamespaces implements TwigNamespaceExtension {
-    private static final Key<CachedValue<Collection<TwigPath>>> CACHE = new Key<>("TWIG_JSON_INDEX_CACHE");
+    public static final Key<CachedValue<Collection<TwigPath>>> CACHE = new Key<>("TWIG_JSON_INDEX_CACHE");
 
     @NotNull
     @Override
@@ -40,8 +42,8 @@ public class JsonFileIndexTwigNamespaces implements TwigNamespaceExtension {
         CachedValue<Collection<TwigPath>> cache = parameter.getProject().getUserData(CACHE);
         if (cache == null) {
             cache = CachedValuesManager.getManager(parameter.getProject()).createCachedValue(() ->
-                CachedValueProvider.Result.create(getNamespacesInner(parameter), PsiModificationTracker.MODIFICATION_COUNT),
-                false
+                            CachedValueProvider.Result.create(getNamespacesInner(parameter), PsiModificationTracker.MODIFICATION_COUNT),
+                    false
             );
 
             parameter.getProject().putUserData(CACHE, cache);
@@ -54,10 +56,14 @@ public class JsonFileIndexTwigNamespaces implements TwigNamespaceExtension {
     private Collection<TwigPath> getNamespacesInner(@NotNull TwigNamespaceExtensionParameter parameter) {
 
         Collection<TwigPath> twigPaths = new ArrayList<>();
+        String namespacesManifestPath = Settings.getInstance(parameter.getProject()).namespacesManifestPath;
 
-        for (final PsiFile psiFile : FilenameIndex.getFilesByName(parameter.getProject(), "ide-twig.json", GlobalSearchScope.allScope(parameter.getProject()))) {
+        VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(namespacesManifestPath);
+        PsiFile psiFile = PsiManager.getInstance(parameter.getProject()).findFile(virtualFile);
+
+        if (psiFile != null) {
             Collection<TwigPath> cachedValue = CachedValuesManager.getCachedValue(psiFile, new MyJsonCachedValueProvider(psiFile));
-            if(cachedValue != null) {
+            if (cachedValue != null) {
                 twigPaths.addAll(cachedValue);
             }
         }
@@ -85,47 +91,20 @@ public class JsonFileIndexTwigNamespaces implements TwigNamespaceExtension {
             } catch (JsonSyntaxException | JsonIOException | IllegalStateException ignored) {
             }
 
-            if(configJson == null) {
+            if (configJson == null) {
                 return Result.create(twigPaths, psiFile, psiFile.getVirtualFile());
             }
 
-            for(TwigPathJson twigPath : configJson.getNamespaces()) {
+            for (TwigPathJson twigPath : configJson.getNamespaces()) {
                 String path = twigPath.getPath();
-                if(path == null) {
-                    path = "";
-                }
-
-                path = StringUtils.stripStart(path.replace("\\", "/"), "/");
-                PsiDirectory parent = psiFile.getParent();
-                if(parent == null) {
-                    continue;
-                }
-
-                // current directory check and subfolder
-                VirtualFile twigRoot;
-                if(path.length() > 0) {
-                    twigRoot = VfsUtil.findRelativeFile(parent.getVirtualFile(), path.split("/"));
-                } else {
-                    twigRoot = psiFile.getParent().getVirtualFile();
-                }
-
-                if(twigRoot == null) {
-                    continue;
-                }
-
-                String relativePath = VfsExUtil.getRelativeProjectPath(psiFile.getProject(), twigRoot);
-                if(relativePath == null) {
-                    continue;
-                }
 
                 String namespace = twigPath.getNamespace();
+                String namespacePath = StringUtils.stripStart(path, "/");
 
-                String namespacePath = StringUtils.stripStart(relativePath, "/");
-
-                if(StringUtils.isNotBlank(namespace)) {
-                    twigPaths.add(new TwigPath(namespacePath, namespace, true));
+                if (StringUtils.isNotBlank(namespace)) {
+                    twigPaths.add(new TwigPath(namespacePath, namespace, false));
                 } else {
-                    twigPaths.add(new TwigPath(namespacePath, TwigUtil.MAIN, true));
+                    twigPaths.add(new TwigPath(namespacePath, TwigUtil.MAIN, false));
                 }
             }
 

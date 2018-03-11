@@ -16,48 +16,28 @@
     <orderEntry type="library" scope="TEST" name="properties" level="project" />
     <orderEntry type="library" scope="TEST" name="junit-4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="java-i18n" level="project" />
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library name="twig">
-        <CLASSES>
-          <root url="file://$USER_HOME$/Documents/twig/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/Documents/twig/lib" recursive="false" />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library">
       <library name="php">
         <CLASSES>
-          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" />
-        </SOURCES>
-        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" recursive="false" />
-        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/php/lib" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library name="yaml">
-        <CLASSES>
-          <root url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/yaml/lib" />
+          <root url="file://$MODULE_DIR$/lib/php" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file:///opt/jetbrains/PhpStorm-172.4155.41/plugins/yaml/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/lib/php" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/idea-php-annotation-plugin.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/idea-php-annotation-plugin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="org.apache.commons:commons-vfs2:2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="twig" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="yaml" level="project" />
   </component>
 </module>

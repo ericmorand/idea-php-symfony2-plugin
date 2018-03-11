@@ -121,9 +121,17 @@
 
         <projectService serviceImplementation="fr.adrienbrault.idea.symfony2plugin.Settings"/>
 
-        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.TwigSettingsForm"
-                             displayName="Twig namespaces"
+
+        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.SettingsForm"
+                             displayName="Twig"
+                             id="Symfony2.SettingsForm"
                              groupId="language"
+                             nonDefaultProject="true"
+        />
+
+        <projectConfigurable instance="fr.adrienbrault.idea.symfony2plugin.ui.TwigSettingsForm"
+                             displayName="Namespaces"
+                             parentId="Symfony2.SettingsForm"
                              nonDefaultProject="true"
                 />
 

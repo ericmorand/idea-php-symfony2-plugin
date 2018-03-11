@@ -1,14 +1,21 @@
 package fr.adrienbrault.idea.symfony2plugin.ui;
 
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.table.TableView;
 import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.ElementProducer;
 import com.intellij.util.ui.ListTableModel;
 import fr.adrienbrault.idea.symfony2plugin.Settings;
+import fr.adrienbrault.idea.symfony2plugin.templating.path.JsonFileIndexTwigNamespaces;
 import fr.adrienbrault.idea.symfony2plugin.templating.path.TwigNamespaceSetting;
 import fr.adrienbrault.idea.symfony2plugin.templating.path.TwigPath;
 import fr.adrienbrault.idea.symfony2plugin.templating.util.TwigUtil;
@@ -17,9 +24,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,9 +40,9 @@ import java.util.List;
  */
 public class TwigSettingsForm implements Configurable {
 
+    private TextFieldWithBrowseButton manifestPath;
     private JPanel panel1;
     private JPanel panelTableView;
-    private JButton resetToDefault;
     private JButton buttonJsonExample;
     private TableView<TwigPath> tableView;
     private Project project;
@@ -39,11 +50,30 @@ public class TwigSettingsForm implements Configurable {
     private ListTableModel<TwigPath> modelList;
 
     public TwigSettingsForm(@NotNull Project project) {
+
         this.project = project;
+
+        manifestPath.setText(getSettings().namespacesManifestPath);
+        manifestPath.getButton().addMouseListener(createPathButtonMouseListener(manifestPath.getTextField(), FileChooserDescriptorFactory.createSingleFileDescriptor("json")));
+        manifestPath.getTextField().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                TwigSettingsForm.this.changed = true;
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                TwigSettingsForm.this.changed = true;
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                TwigSettingsForm.this.changed = true;
+            }
+        });
     }
 
     private void attachItems() {
-
         // @TODO: remove this check, moved init stuff out of constructor
         // dont load on project less context
         if(this.project == null) {
@@ -88,24 +118,6 @@ public class TwigSettingsForm implements Configurable {
 
         this.modelList.addTableModelListener(e -> TwigSettingsForm.this.changed = true);
 
-        resetToDefault.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                TwigSettingsForm.this.resetList();
-
-                List<TwigPath> sortableLookupItems = new ArrayList<>();
-                sortableLookupItems.addAll(TwigUtil.getTwigNamespaces(TwigSettingsForm.this.project, false));
-                Collections.sort(sortableLookupItems);
-
-                for (TwigPath twigPath : sortableLookupItems) {
-                    // dont use managed class here
-                    // @TODO state to enabled (should not be here)
-                    TwigSettingsForm.this.modelList.addRow(twigPath.clone());
-                }
-            }
-        });
-
         ToolbarDecorator tablePanel = ToolbarDecorator.createDecorator(this.tableView, new ElementProducer<TwigPath>() {
             @Override
             public TwigPath createElement() {
@@ -144,6 +156,42 @@ public class TwigSettingsForm implements Configurable {
         return this.panel1;
     }
 
+    private MouseListener createPathButtonMouseListener(final JTextField textField, final FileChooserDescriptor fileChooserDescriptor) {
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                VirtualFile projectDirectory = project.getBaseDir();
+                VirtualFile selectedFile = FileChooser.chooseFile(
+                        fileChooserDescriptor,
+                        project,
+                        VfsUtil.findRelativeFile(textField.getText(), projectDirectory)
+                );
+
+                if (null == selectedFile) {
+                    return; // Ignore but keep the previous path
+                }
+
+                textField.setText(selectedFile.getPath());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+            }
+        };
+    }
+
     @Override
     public boolean isModified() {
         return this.changed;
@@ -160,7 +208,14 @@ public class TwigSettingsForm implements Configurable {
             }
         }
 
+        getSettings().namespacesManifestPath = this.manifestPath.getText();
         getSettings().twigNamespaces = twigPaths;
+
+        this.project.putUserData(JsonFileIndexTwigNamespaces.CACHE, null);
+
+        this.resetList();
+        this.attachItems();
+
         this.changed = false;
     }
 
@@ -169,17 +224,14 @@ public class TwigSettingsForm implements Configurable {
     }
 
     private void resetList() {
-        // clear list, easier?
-        while(this.modelList.getRowCount() > 0) {
-            this.modelList.removeRow(0);
-        }
-
+        this.modelList.setItems(new ArrayList<>());
     }
 
     @Override
     public void reset() {
         this.resetList();
         this.attachItems();
+        this.manifestPath.setText(null);
         this.changed = false;
     }
 
